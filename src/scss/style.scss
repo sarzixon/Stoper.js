@@ -26,7 +26,7 @@ body {
   width: 100%;
   height: 100%;
   position: relative;
-  &__timer {
+  &__clock {
     font-size: 3.5rem;
     @include abs(50%);
   }

@@ -1,8 +1,8 @@
-const elements = () => {
+const getElements = () => {
   return {
-    timer: document.querySelector('.stoper__timer'),
+    clock: document.querySelector('.stoper__clock'),
     stoper: document.querySelector('.stoper__startBtn'),
   };
 };
 
-export default elements;
+export default getElements;

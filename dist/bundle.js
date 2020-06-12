@@ -9795,14 +9795,14 @@ module.exports.formatError = function(err) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var elements = function elements() {
+var getElements = function getElements() {
   return {
-    timer: document.querySelector('.stoper__timer'),
+    clock: document.querySelector('.stoper__clock'),
     stoper: document.querySelector('.stoper__startBtn')
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (elements);
+/* harmony default export */ __webpack_exports__["default"] = (getElements);
 
 /***/ }),
 
@@ -9823,12 +9823,40 @@ __webpack_require__.r(__webpack_exports__);
 
 var log = function log(_log) {
   return console.log(_log);
-}; // log(elements);
+};
 
+var state = {
+  value: 0,
+  start: false
+};
+
+var transformStoper = function transformStoper(value) {
+  var base;
+
+  if (value === 0) {
+    base = '00:00';
+  } else if (value < 10) {
+    base = "00:0".concat(value);
+  } else if (value >= 10) {
+    //check minutes
+    var min = (value / 60).toString().split('.')[0]; // check seconds - minutes
+
+    var sec = value - min * 60;
+    base = "".concat(min >= 10 ? min : "0".concat(min), ":").concat(sec >= 10 ? sec : "0".concat(sec));
+  }
+
+  displayStoper(base);
+};
+
+var displayStoper = function displayStoper(value) {
+  return state.elements.clock.textContent = value;
+};
 
 var init = function init() {
-  // get primary elements;
-  var elements = Object(_elements__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  // get primary elements add to state
+  state.elements = Object(_elements__WEBPACK_IMPORTED_MODULE_1__["default"])(); // display initial state
+
+  transformStoper(state.value); // set event listener for buttons
 };
 
 window.addEventListener('load', function () {

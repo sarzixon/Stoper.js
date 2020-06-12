@@ -4,7 +4,8 @@ simple stoper made in js.
 
 ## Live preview
 
-    [click here](https://sarzal666.github.io/Stoper.js/).
+see how it works
+[click_here](https://sarzal666.github.io/Stoper.js/).
 
 ## Installation
 

@@ -1,9 +1,12 @@
 import '../scss/style.scss';
-import theme from './component';
-import string from './login';
+import getElements from './elements';
 
 const log = (log) => console.log(log);
+// log(elements);
 
-log('auuuu');
-log(theme.color);
-log(string);
+const init = () => {
+  // get primary elements;
+  const elements = getElements();
+};
+
+window.addEventListener('load', () => init());

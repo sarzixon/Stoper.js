@@ -9786,19 +9786,23 @@ module.exports.formatError = function(err) {
 
 /***/ }),
 
-/***/ "./src/js/component.js":
-/*!*****************************!*\
-  !*** ./src/js/component.js ***!
-  \*****************************/
+/***/ "./src/js/elements.js":
+/*!****************************!*\
+  !*** ./src/js/elements.js ***!
+  \****************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var theme = {
-  color: "różowokoperkowy"
+var elements = function elements() {
+  return {
+    timer: document.querySelector('.stoper__timer'),
+    stoper: document.querySelector('.stoper__startBtn')
+  };
 };
-/* harmony default export */ __webpack_exports__["default"] = (theme);
+
+/* harmony default export */ __webpack_exports__["default"] = (elements);
 
 /***/ }),
 
@@ -9813,35 +9817,23 @@ var theme = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scss_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/style.scss */ "./src/scss/style.scss");
 /* harmony import */ var _scss_style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_scss_style_scss__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./component */ "./src/js/component.js");
-/* harmony import */ var _login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./login */ "./src/js/login.js");
-
+/* harmony import */ var _elements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./elements */ "./src/js/elements.js");
 
 
 
 var log = function log(_log) {
   return console.log(_log);
+}; // log(elements);
+
+
+var init = function init() {
+  // get primary elements;
+  var elements = Object(_elements__WEBPACK_IMPORTED_MODULE_1__["default"])();
 };
 
-log('auuuu');
-log(_component__WEBPACK_IMPORTED_MODULE_1__["default"].color);
-log(_login__WEBPACK_IMPORTED_MODULE_2__["default"]);
-
-/***/ }),
-
-/***/ "./src/js/login.js":
-/*!*************************!*\
-  !*** ./src/js/login.js ***!
-  \*************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var string = {
-  name: 'xd'
-};
-/* harmony default export */ __webpack_exports__["default"] = (string);
+window.addEventListener('load', function () {
+  return init();
+});
 
 /***/ }),
 

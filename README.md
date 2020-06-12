@@ -1,10 +1,10 @@
-# Name of your project
+# Stoper.js
 
-short description
+simple stoper made in js.
 
 ## Live preview
 
-    [click here](your link).
+    [click here](https://sarzal666.github.io/Stoper.js/).
 
 ## Installation
 

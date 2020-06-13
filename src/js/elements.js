@@ -1,7 +1,9 @@
 const getElements = () => {
   return {
     clock: document.querySelector('.stoper__clock'),
-    stoper: document.querySelector('.stoper__startBtn'),
+    startBtn: document.querySelector('.stoper__startBtn'),
+    pauseBtn: document.querySelector('.stoper__buttonAlign--pauseBtn'),
+    resetBtn: document.querySelector('.stoper__buttonAlign--resetBtn'),
   };
 };
 

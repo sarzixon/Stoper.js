@@ -9798,7 +9798,9 @@ __webpack_require__.r(__webpack_exports__);
 var getElements = function getElements() {
   return {
     clock: document.querySelector('.stoper__clock'),
-    stoper: document.querySelector('.stoper__startBtn')
+    startBtn: document.querySelector('.stoper__startBtn'),
+    pauseBtn: document.querySelector('.stoper__buttonAlign--pauseBtn'),
+    resetBtn: document.querySelector('.stoper__buttonAlign--resetBtn')
   };
 };
 
@@ -9818,6 +9820,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scss_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/style.scss */ "./src/scss/style.scss");
 /* harmony import */ var _scss_style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_scss_style_scss__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _elements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./elements */ "./src/js/elements.js");
+/* harmony import */ var _textEdit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./textEdit */ "./src/js/textEdit.js");
+
 
 
 
@@ -9826,11 +9830,51 @@ var log = function log(_log) {
 };
 
 var state = {
-  value: 70,
+  value: 0,
   start: false
 };
 
-var transformStoper = function transformStoper(value) {
+var startCounting = function startCounting() {
+  state.start = true;
+
+  if (state.start) {
+    setInterval(function () {
+      state.value++;
+      Object(_textEdit__WEBPACK_IMPORTED_MODULE_2__["displayStoper"])(state.elements.clock, Object(_textEdit__WEBPACK_IMPORTED_MODULE_2__["editTimeDisplay"])(state.value));
+    }, 1000);
+  }
+};
+
+var init = function init() {
+  // get primary elements add to state
+  state.elements = Object(_elements__WEBPACK_IMPORTED_MODULE_1__["default"])();
+  var elements = state.elements; // display initial state
+
+  Object(_textEdit__WEBPACK_IMPORTED_MODULE_2__["displayStoper"])(elements.clock, Object(_textEdit__WEBPACK_IMPORTED_MODULE_2__["editTimeDisplay"])(state.value)); // set event listener for buttons
+
+  elements.startBtn.addEventListener('click', function () {
+    return startCounting();
+  });
+};
+
+window.addEventListener('load', function () {
+  return init();
+});
+
+/***/ }),
+
+/***/ "./src/js/textEdit.js":
+/*!****************************!*\
+  !*** ./src/js/textEdit.js ***!
+  \****************************/
+/*! exports provided: editTimeDisplay, displayStoper */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editTimeDisplay", function() { return editTimeDisplay; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayStoper", function() { return displayStoper; });
+var editTimeDisplay = function editTimeDisplay(value) {
   var base;
 
   if (value === 0) {
@@ -9839,7 +9883,7 @@ var transformStoper = function transformStoper(value) {
     base = "00:0".concat(value);
   } else if (value >= 10) {
     //check minutes
-    var min = (value / 60).toString().split('.')[0]; // check seconds - minutes
+    var min = (value / 60).toString().split('.')[0]; // calc seconds - minutes
 
     var sec = value - min * 60;
     base = "".concat(min >= 10 ? min : "0".concat(min), ":").concat(sec >= 10 ? sec : "0".concat(sec));
@@ -9848,20 +9892,11 @@ var transformStoper = function transformStoper(value) {
   return base;
 };
 
-var displayStoper = function displayStoper(value) {
-  return state.elements.clock.textContent = value;
+var displayStoper = function displayStoper(target, value) {
+  return target.textContent = value;
 };
 
-var init = function init() {
-  // get primary elements add to state
-  state.elements = Object(_elements__WEBPACK_IMPORTED_MODULE_1__["default"])(); // display initial state
 
-  displayStoper(transformStoper(state.value)); // set event listener for buttons
-};
-
-window.addEventListener('load', function () {
-  return init();
-});
 
 /***/ }),
 

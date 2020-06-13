@@ -1,39 +1,33 @@
 import '../scss/style.scss';
 import getElements from './elements';
+import { editTimeDisplay, displayStoper } from './textEdit';
 
 const log = (log) => console.log(log);
 
 const state = {
-  value: 70,
+  value: 0,
   start: false,
 };
 
-const transformStoper = (value) => {
-  let base;
-  if (value === 0) {
-    base = '00:00';
-  } else if (value < 10) {
-    base = `00:0${value}`;
-  } else if (value >= 10) {
-    //check minutes
-    let min = (value / 60).toString().split('.')[0];
-    // check seconds - minutes
-    let sec = value - min * 60;
-    base = `${min >= 10 ? min : `0${min}`}:${sec >= 10 ? sec : `0${sec}`}`;
+const startCounting = () => {
+  state.start = true;
+  if (state.start) {
+    setInterval(() => {
+      state.value++;
+      displayStoper(state.elements.clock, editTimeDisplay(state.value));
+    }, 1000);
   }
-  return base;
 };
-
-const displayStoper = (value) => (state.elements.clock.textContent = value);
 
 const init = () => {
   // get primary elements add to state
   state.elements = getElements();
-
+  const { elements } = state;
   // display initial state
-  displayStoper(transformStoper(state.value));
+  displayStoper(elements.clock, editTimeDisplay(state.value));
 
   // set event listener for buttons
+  elements.startBtn.addEventListener('click', () => startCounting());
 };
 
 window.addEventListener('load', () => init());

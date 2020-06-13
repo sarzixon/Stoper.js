@@ -9826,7 +9826,7 @@ var log = function log(_log) {
 };
 
 var state = {
-  value: 0,
+  value: 70,
   start: false
 };
 
@@ -9845,7 +9845,7 @@ var transformStoper = function transformStoper(value) {
     base = "".concat(min >= 10 ? min : "0".concat(min), ":").concat(sec >= 10 ? sec : "0".concat(sec));
   }
 
-  displayStoper(base);
+  return base;
 };
 
 var displayStoper = function displayStoper(value) {
@@ -9856,7 +9856,7 @@ var init = function init() {
   // get primary elements add to state
   state.elements = Object(_elements__WEBPACK_IMPORTED_MODULE_1__["default"])(); // display initial state
 
-  transformStoper(state.value); // set event listener for buttons
+  displayStoper(transformStoper(state.value)); // set event listener for buttons
 };
 
 window.addEventListener('load', function () {

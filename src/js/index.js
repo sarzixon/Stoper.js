@@ -4,7 +4,7 @@ import getElements from './elements';
 const log = (log) => console.log(log);
 
 const state = {
-  value: 0,
+  value: 70,
   start: false,
 };
 
@@ -21,7 +21,7 @@ const transformStoper = (value) => {
     let sec = value - min * 60;
     base = `${min >= 10 ? min : `0${min}`}:${sec >= 10 ? sec : `0${sec}`}`;
   }
-  displayStoper(base);
+  return base;
 };
 
 const displayStoper = (value) => (state.elements.clock.textContent = value);
@@ -31,7 +31,7 @@ const init = () => {
   state.elements = getElements();
 
   // display initial state
-  transformStoper(state.value);
+  displayStoper(transformStoper(state.value));
 
   // set event listener for buttons
 };

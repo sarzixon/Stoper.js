@@ -38,6 +38,7 @@ body {
     border: none;
     letter-spacing: 4px;
     font-size: 16px;
+    text-transform: uppercase;
     transition: all 0.4s;
     -webkit-box-shadow: inset 2px 2px 36px -16px rgba(0, 0, 0, 0.82);
     -moz-box-shadow: inset 2px 2px 36px -16px rgba(0, 0, 0, 0.82);
@@ -51,11 +52,35 @@ body {
       box-shadow: none;
     }
   }
+  &__buttonAlign {
+    width: 60%;
+    @include abs(85%);
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    &--pauseBtn,
+    &--resetBtn {
+      @extend .stoper__startBtn;
+      position: unset;
+      left: unset;
+      top: unset;
+      transform: unset;
+    }
+  }
+}
+
+.hidden {
+  display: none;
 }
 
 @media screen and (min-width: 1000px) {
   .stoper {
     width: 60%;
     height: 75vh;
+  }
+}
+@media screen and (max-width: 500px) {
+  .stoper__buttonAlign {
+    width: 80%;
   }
 }

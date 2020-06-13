@@ -26,7 +26,7 @@ body {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%); }
-  .stoper__startBtn {
+  .stoper__startBtn, .stoper__buttonAlign--pauseBtn, .stoper__buttonAlign--resetBtn {
     width: 130px;
     height: 40px;
     border-radius: 25px;
@@ -34,6 +34,7 @@ body {
     border: none;
     letter-spacing: 4px;
     font-size: 16px;
+    text-transform: uppercase;
     transition: all 0.4s;
     -webkit-box-shadow: inset 2px 2px 36px -16px rgba(0, 0, 0, 0.82);
     -moz-box-shadow: inset 2px 2px 36px -16px rgba(0, 0, 0, 0.82);
@@ -42,16 +43,37 @@ body {
     left: 50%;
     top: 85%;
     transform: translate(-50%, -85%); }
-    .stoper__startBtn:focus {
+    .stoper__startBtn:focus, .stoper__buttonAlign--pauseBtn:focus, .stoper__buttonAlign--resetBtn:focus {
       outline: none; }
-    .stoper__startBtn:hover {
+    .stoper__startBtn:hover, .stoper__buttonAlign--pauseBtn:hover, .stoper__buttonAlign--resetBtn:hover {
       font-size: 18px;
       box-shadow: none; }
+  .stoper__buttonAlign {
+    width: 60%;
+    position: absolute;
+    left: 50%;
+    top: 85%;
+    transform: translate(-50%, -85%);
+    position: relative;
+    display: flex;
+    justify-content: space-between; }
+    .stoper__buttonAlign--pauseBtn, .stoper__buttonAlign--resetBtn {
+      position: unset;
+      left: unset;
+      top: unset;
+      transform: unset; }
+
+.hidden {
+  display: none; }
 
 @media screen and (min-width: 1000px) {
   .stoper {
     width: 60%;
     height: 75vh; } }
+
+@media screen and (max-width: 500px) {
+  .stoper__buttonAlign {
+    width: 80%; } }
 
 
 /*# sourceMappingURL=style.css.map*/

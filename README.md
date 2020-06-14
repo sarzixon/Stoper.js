@@ -5,7 +5,7 @@ simple stoper made in js.
 ## Live preview
 
 see how it works
-[click_here](https://sarzal666.github.io/Stoper.js/).
+[click_here](https://sarzal666.github.io/Stoper.js/dist).
 
 ## Installation
 

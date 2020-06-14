@@ -1,35 +1,14 @@
 import '../scss/style.scss';
 import getElements from './elements';
 import { editTimeDisplay, displayStoper } from './textEdit';
+import { startCounting, pauseCounting, resetCounting } from './counting';
 
 const log = (log) => console.log(log);
 
 const state = {
   value: 0,
   start: false,
-};
-
-const startCounting = () => {
-  state.start = true;
-  const { elements } = state;
-  elements.startBtn.classList.add('hidden');
-  elements.buttonAlign.classList.remove('hidden');
-  setInterval(() => {
-    if (state.start) {
-      state.value++;
-      displayStoper(elements.clock, editTimeDisplay(state.value));
-    }
-  }, 1000);
-};
-
-const pauseCounting = () => {
-  if (state.start) {
-    state.start = false;
-    state.elements.pauseBtn.textContent = 'Continue';
-  } else {
-    state.start = true;
-    state.elements.pauseBtn.textContent = 'Pause';
-  }
+  interval: false,
 };
 
 const init = () => {
@@ -42,10 +21,12 @@ const init = () => {
   // set event listener for buttons
   //  1. Start Btn
   elements.startBtn.addEventListener('click', () => {
-    if (state.start === false) startCounting();
+    if (state.start === false) startCounting(state);
   });
   //  2. pause Btn
-  elements.pauseBtn.addEventListener('click', pauseCounting);
+  elements.pauseBtn.addEventListener('click', () => pauseCounting(state));
+  // 3. reset Btn
+  elements.resetBtn.addEventListener('click', () => resetCounting(state));
 };
 
 window.addEventListener('load', () => init());

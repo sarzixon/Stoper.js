@@ -29,6 +29,12 @@ body {
   &__clock {
     font-size: 3.5rem;
     @include abs(50%);
+    &::after {
+      content: 's';
+      font-size: 2.5rem;
+      position: absolute;
+      bottom: 5%;
+    }
   }
   &__startBtn {
     width: 130px;

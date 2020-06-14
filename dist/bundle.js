@@ -9786,6 +9786,60 @@ module.exports.formatError = function(err) {
 
 /***/ }),
 
+/***/ "./src/js/counting.js":
+/*!****************************!*\
+  !*** ./src/js/counting.js ***!
+  \****************************/
+/*! exports provided: startCounting, pauseCounting, resetCounting */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "startCounting", function() { return startCounting; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pauseCounting", function() { return pauseCounting; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "resetCounting", function() { return resetCounting; });
+/* harmony import */ var _textEdit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./textEdit */ "./src/js/textEdit.js");
+
+
+var startCounting = function startCounting(state) {
+  state.start = true;
+  var elements = state.elements;
+  elements.startBtn.classList.add('hidden');
+  elements.buttonAlign.classList.remove('hidden');
+
+  if (state.interval === false) {
+    state.interval = true;
+    setInterval(function () {
+      if (state.start) {
+        state.value++;
+        Object(_textEdit__WEBPACK_IMPORTED_MODULE_0__["displayStoper"])(elements.clock, Object(_textEdit__WEBPACK_IMPORTED_MODULE_0__["editTimeDisplay"])(state.value));
+      }
+    }, 1000);
+  }
+};
+
+var pauseCounting = function pauseCounting(state) {
+  if (state.start) {
+    state.start = false;
+    state.elements.pauseBtn.textContent = 'Continue';
+  } else {
+    state.start = true;
+    state.elements.pauseBtn.textContent = 'Pause';
+  }
+};
+
+var resetCounting = function resetCounting(state) {
+  state.value = 0;
+  state.start = false;
+  Object(_textEdit__WEBPACK_IMPORTED_MODULE_0__["displayStoper"])(state.elements.clock, Object(_textEdit__WEBPACK_IMPORTED_MODULE_0__["editTimeDisplay"])(state.value));
+  state.elements.buttonAlign.classList.add('hidden');
+  state.elements.startBtn.classList.toggle('hidden');
+};
+
+
+
+/***/ }),
+
 /***/ "./src/js/elements.js":
 /*!****************************!*\
   !*** ./src/js/elements.js ***!
@@ -9822,6 +9876,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _scss_style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_scss_style_scss__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _elements__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./elements */ "./src/js/elements.js");
 /* harmony import */ var _textEdit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./textEdit */ "./src/js/textEdit.js");
+/* harmony import */ var _counting__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./counting */ "./src/js/counting.js");
+
 
 
 
@@ -9832,30 +9888,8 @@ var log = function log(_log) {
 
 var state = {
   value: 0,
-  start: false
-};
-
-var startCounting = function startCounting() {
-  state.start = true;
-  var elements = state.elements;
-  elements.startBtn.classList.add('hidden');
-  elements.buttonAlign.classList.remove('hidden');
-  setInterval(function () {
-    if (state.start) {
-      state.value++;
-      Object(_textEdit__WEBPACK_IMPORTED_MODULE_2__["displayStoper"])(elements.clock, Object(_textEdit__WEBPACK_IMPORTED_MODULE_2__["editTimeDisplay"])(state.value));
-    }
-  }, 1000);
-};
-
-var pauseCounting = function pauseCounting() {
-  if (state.start) {
-    state.start = false;
-    state.elements.pauseBtn.textContent = 'Continue';
-  } else {
-    state.start = true;
-    state.elements.pauseBtn.textContent = 'Pause';
-  }
+  start: false,
+  interval: false
 };
 
 var init = function init() {
@@ -9867,10 +9901,16 @@ var init = function init() {
   //  1. Start Btn
 
   elements.startBtn.addEventListener('click', function () {
-    if (state.start === false) startCounting();
+    if (state.start === false) Object(_counting__WEBPACK_IMPORTED_MODULE_3__["startCounting"])(state);
   }); //  2. pause Btn
 
-  elements.pauseBtn.addEventListener('click', pauseCounting);
+  elements.pauseBtn.addEventListener('click', function () {
+    return Object(_counting__WEBPACK_IMPORTED_MODULE_3__["pauseCounting"])(state);
+  }); // 3. reset Btn
+
+  elements.resetBtn.addEventListener('click', function () {
+    return Object(_counting__WEBPACK_IMPORTED_MODULE_3__["resetCounting"])(state);
+  });
 };
 
 window.addEventListener('load', function () {

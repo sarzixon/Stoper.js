@@ -11,11 +11,24 @@ const state = {
 
 const startCounting = () => {
   state.start = true;
-  if (state.start) {
-    setInterval(() => {
+  const { elements } = state;
+  elements.startBtn.classList.add('hidden');
+  elements.buttonAlign.classList.remove('hidden');
+  setInterval(() => {
+    if (state.start) {
       state.value++;
-      displayStoper(state.elements.clock, editTimeDisplay(state.value));
-    }, 1000);
+      displayStoper(elements.clock, editTimeDisplay(state.value));
+    }
+  }, 1000);
+};
+
+const pauseCounting = () => {
+  if (state.start) {
+    state.start = false;
+    state.elements.pauseBtn.textContent = 'Continue';
+  } else {
+    state.start = true;
+    state.elements.pauseBtn.textContent = 'Pause';
   }
 };
 
@@ -27,7 +40,12 @@ const init = () => {
   displayStoper(elements.clock, editTimeDisplay(state.value));
 
   // set event listener for buttons
-  elements.startBtn.addEventListener('click', () => startCounting());
+  //  1. Start Btn
+  elements.startBtn.addEventListener('click', () => {
+    if (state.start === false) startCounting();
+  });
+  //  2. pause Btn
+  elements.pauseBtn.addEventListener('click', pauseCounting);
 };
 
 window.addEventListener('load', () => init());

@@ -9799,6 +9799,7 @@ var getElements = function getElements() {
   return {
     clock: document.querySelector('.stoper__clock'),
     startBtn: document.querySelector('.stoper__startBtn'),
+    buttonAlign: document.querySelector('.stoper__buttonAlign'),
     pauseBtn: document.querySelector('.stoper__buttonAlign--pauseBtn'),
     resetBtn: document.querySelector('.stoper__buttonAlign--resetBtn')
   };
@@ -9836,12 +9837,24 @@ var state = {
 
 var startCounting = function startCounting() {
   state.start = true;
-
-  if (state.start) {
-    setInterval(function () {
+  var elements = state.elements;
+  elements.startBtn.classList.add('hidden');
+  elements.buttonAlign.classList.remove('hidden');
+  setInterval(function () {
+    if (state.start) {
       state.value++;
-      Object(_textEdit__WEBPACK_IMPORTED_MODULE_2__["displayStoper"])(state.elements.clock, Object(_textEdit__WEBPACK_IMPORTED_MODULE_2__["editTimeDisplay"])(state.value));
-    }, 1000);
+      Object(_textEdit__WEBPACK_IMPORTED_MODULE_2__["displayStoper"])(elements.clock, Object(_textEdit__WEBPACK_IMPORTED_MODULE_2__["editTimeDisplay"])(state.value));
+    }
+  }, 1000);
+};
+
+var pauseCounting = function pauseCounting() {
+  if (state.start) {
+    state.start = false;
+    state.elements.pauseBtn.textContent = 'Continue';
+  } else {
+    state.start = true;
+    state.elements.pauseBtn.textContent = 'Pause';
   }
 };
 
@@ -9851,10 +9864,13 @@ var init = function init() {
   var elements = state.elements; // display initial state
 
   Object(_textEdit__WEBPACK_IMPORTED_MODULE_2__["displayStoper"])(elements.clock, Object(_textEdit__WEBPACK_IMPORTED_MODULE_2__["editTimeDisplay"])(state.value)); // set event listener for buttons
+  //  1. Start Btn
 
   elements.startBtn.addEventListener('click', function () {
-    return startCounting();
-  });
+    if (state.start === false) startCounting();
+  }); //  2. pause Btn
+
+  elements.pauseBtn.addEventListener('click', pauseCounting);
 };
 
 window.addEventListener('load', function () {

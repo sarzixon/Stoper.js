@@ -3,8 +3,6 @@ import getElements from './elements';
 import { editTimeDisplay, displayStoper } from './textEdit';
 import { startCounting, pauseCounting, resetCounting } from './counting';
 
-const log = (log) => console.log(log);
-
 (() => {
   const state = {
     value: 0,

@@ -9886,36 +9886,38 @@ var log = function log(_log) {
   return console.log(_log);
 };
 
-var state = {
-  value: 0,
-  start: false,
-  interval: false
-};
+(function () {
+  var state = {
+    value: 0,
+    start: false,
+    interval: false
+  };
 
-var init = function init() {
-  // get primary elements add to state
-  state.elements = Object(_elements__WEBPACK_IMPORTED_MODULE_1__["default"])();
-  var elements = state.elements; // display initial state
+  var init = function init() {
+    // get primary elements add to state
+    state.elements = Object(_elements__WEBPACK_IMPORTED_MODULE_1__["default"])();
+    var elements = state.elements; // display initial state
 
-  Object(_textEdit__WEBPACK_IMPORTED_MODULE_2__["displayStoper"])(elements.clock, Object(_textEdit__WEBPACK_IMPORTED_MODULE_2__["editTimeDisplay"])(state.value)); // set event listener for buttons
-  //  1. Start Btn
+    Object(_textEdit__WEBPACK_IMPORTED_MODULE_2__["displayStoper"])(elements.clock, Object(_textEdit__WEBPACK_IMPORTED_MODULE_2__["editTimeDisplay"])(state.value)); // set event listener for buttons
+    //  1. Start Btn
 
-  elements.startBtn.addEventListener('click', function () {
-    if (state.start === false) Object(_counting__WEBPACK_IMPORTED_MODULE_3__["startCounting"])(state);
-  }); //  2. pause Btn
+    elements.startBtn.addEventListener('click', function () {
+      if (state.start === false) Object(_counting__WEBPACK_IMPORTED_MODULE_3__["startCounting"])(state);
+    }); //  2. pause Btn
 
-  elements.pauseBtn.addEventListener('click', function () {
-    return Object(_counting__WEBPACK_IMPORTED_MODULE_3__["pauseCounting"])(state);
-  }); // 3. reset Btn
+    elements.pauseBtn.addEventListener('click', function () {
+      return Object(_counting__WEBPACK_IMPORTED_MODULE_3__["pauseCounting"])(state);
+    }); // 3. reset Btn
 
-  elements.resetBtn.addEventListener('click', function () {
-    return Object(_counting__WEBPACK_IMPORTED_MODULE_3__["resetCounting"])(state);
+    elements.resetBtn.addEventListener('click', function () {
+      return Object(_counting__WEBPACK_IMPORTED_MODULE_3__["resetCounting"])(state);
+    });
+  };
+
+  window.addEventListener('load', function () {
+    return init();
   });
-};
-
-window.addEventListener('load', function () {
-  return init();
-});
+})();
 
 /***/ }),
 
